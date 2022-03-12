@@ -1,0 +1,544 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>PaperPass 最权威论文抄袭检测系统</title>
+<style type="text/css">
+<!--
+user_icon {
+color: #FFFFFF;
+}
+html
+{
+overflow-x:hidden;
+overflow-y:auto;
+}
+body,td,th {
+font-family: "微软雅黑";
+font-size: 12px;
+}
+h1,h2,h3,h4,h5,h6 {
+font-family: "宋体";
+}
+p{
+margin-bottom:10px;
+}
+demo_padding {
+line-height: 30px;
+}
+.zhengwen {
+padding-right: 15px;
+padding-left: 5px;
+padding-bottom:100px;
+font-size: 13px;
+line-height: 20px;
+color: #666666;
+}
+.zhengwencenter {
+padding-right: 15px;
+padding-left: 0px;
+margin-bottom:10px;
+font-size: 13px;
+line-height: 20px;
+color: #666666;
+text-align:center
+}
+.neikuang {
+background-color: #EBEBEB;
+border: 1px solid #999999;
+padding-right: 10px;
+padding-left: 10px;
+margin-top:10px;
+margin-left:25px;
+width:300px;
+}
+.shubu{
+height: 20px;
+width: 20px;
+margin-left:25px;
+background-color: #FFFFFF;
+border: 1px solid #999999;
+text-align: center;
+vertical-align: middle;
+display: block;
+color: #666666;
+}
+a.red:link {color:#FF0000}
+a.red:visited {color:#FF0000}
+a.red:hover {color:#000000}
+a.red:active {color:#000000}
+
+a.orange:link {color:#FF6600}
+a.orange:visited {color:#FF6600}
+a.orange:hover {color:#000000}
+a.orange:active {color:#000000}
+
+a.dark:link {color:#666666}
+a.dark:visited {color:#666666}
+a.dark:hover {color:#000000}
+a.dark:active {color:#000000}
+
+a.pagelink:hover {color:#000000}
+a.pagelink:active {color:#000000}
+
+.green{color:#008000}
+.gray{color:#666666}
+.red{color:#FF0000}
+.orange{color:#FF6600}
+a{TEXT-DECORATION:none}
+
+-->
+</style>
+</head>
+<body>
+
+
+<div class="zhengwen">
+<div>
+<span style="margin-left:25px"></span>
+[
+<a class="pagelink" href="paper_1.htm">首页</a>
+<a class="pagelink" href="paper_11.htm">上一页</a>
+<a class="pagelink" href="#">下一页</a>
+<a class="pagelink" href="paper_12.htm">尾页</a>
+页码：12/12页
+]
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">699</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>为了完成本次毕业设计，自学了一门的编程语言Python，并结合实际，把程序设计与硬件电路紧密地结合在一起，编写程序使一些硬件设备能正常工作。</span><span class='green'>比如在文章的4.1，用Python的扩展库python-gpio库，轻松访问树莓派的GPIO引脚；</span><span class='green'>在文章的4.5.1，用强大的PyQt4扩展包，设计了客户端界面程序；</span><span class='green'>在文章4.5.6，利用cv2库，对图像进行简单的处理。</span><span class='green'>在了解了一些硬件电路的背后的原理之后，再结合以前对模拟电路和数字电路的学习，这对编写程序实现各个功能提供了可行性。</span><span class='green'>如在文章4.3.2和4.4.4，使用了几种常用的通信协议 one- wire、 I2 C、 SPI，</span><span class='green'>DHT11温湿度传感器采用第一种通信方式，这种方式是无同步时钟的，需要通过特定的约定来进行通信，</span><a href='../sentence_detail/1036/1036.htm' target='right' class='orange' >有时会出现数据紊乱，因此需要对 DHT11采集的数据进行错误判断；</a><span class='green'>LCD显示器通过SPI(串行外设接口)与数据总线连接，在开启服务器程序时，显示西南石油大学校徽；</span><span class='green'>BMP180气压传感器则通过I2C与数据总线相连，因为该传感器需要对采集的数据进行编程处理，所以是整个程序最为复杂的一部分之一。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">700</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>在 Python网络编程这方面，遇到许多困难，比如采用什么方式传送数据，一开始，使用 json模块打包发送的数据，</span><span class='green'>但发现，只能打包字符串类型格式的数据，对于其它类型的数据，则需要类型转换，这大大减低了程序执行的效率，</span><span class='green'>最后，采用 struct模块，例如，在文章4.5.3，使用该模块中的 pack函数对数据进行打包，</span><span class='green'>接收方通过套接字接收到数据后，再使用 unpack函数对数据进行解包，期间在整个过程中，不仅不需要对数据类型进行任何的转化，</span><span class='green'>而且执行效率也大大加快。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">701</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>对视频监控，使用过两种方式motion，mjpg-streamer， motion图像的实时性差，传输太卡顿；</span><a href='../sentence_detail/1045/1045.htm' target='right' class='red' >而streamer传输视频流很快，几乎不卡顿。</a><span class='green'>这两种方式实质是两种开源软件，只需编译、安装、执行即可，</span><span class='green'>操作方便，但无法嵌入到自己的程序中，只能另外开辟进程独立运行，然而这样做产生一个新的问题，</span><span class='green'>有些自带功能不适用，且太占处理器资源。</span><span class='green'>为了提高执行效率，兼容自己的程序，使用Pyhong提供cv2库、Image库、socket库处理视频图像和传输图像。</span><span class='green'>在文章4.4.1，对于 USB接口的摄像头，先将捕获到的图像压缩成 JPEG格式，</span><span class='green'>再保存内存文件中，然传输给接收方，传输较为流畅，图片清晰，度较差；</span><span class='green'>CSI接口的摄像头，则直接使用picamera模块捕获图像后再传送，传输的帧数不高，但清晰度较高，高清晰度增强了人脸识别率。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">702</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>最后，在编写代码方面，为了获得更好的性能，可能还要不断改写代码，删除不必要的变量、循环，</span><span class='green'>同时还需注意处理中断、定义处理器的休眠时间和看门狗、管理合适的内存片段，以避免程序崩溃。</span><span class='green'>Python有丰富的代码库，这些代码库都是一些高级开发者编写完成的，所以只要调用一个函数，就能在后台执行所有的内置调用，</span><span class='green'>有了这些代码库，就能编写出更健壮的代码，减少常犯的错误。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">703</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>谢辞</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">704</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>本次毕业设计论文是在周云旭老师悉心指导下，在师兄、师姐们的帮助下所完成的。</span><a href='../sentence_detail/1059/1059.htm' target='right' class='orange' >首先，非常感谢周老师对我本次毕业设计所给予的帮助。</a><span class='green'>在论文的准备阶段，周老师向我提供了大量的参考文献，师兄、师姐们也向我阐述了一些传感器的工作原理。</span><span class='green'>在辅助师兄们编写程序阶段，查阅了很多的相关知识，在程序初稿完成后的调试阶段，他们也给了我很多的帮助和指点，使自己对程序的所采用的算法有了详细地认识。</span><span class='green'>在论文最后部分，师姐向我提供了很多的基础数据，并教我如何分析、处理实验点，使得论文中的实验部分更具有准确性。</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">705</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>在完成本次毕业设计的过程中 ，我学会了许多编程和专业知识，这弥补了过去自己在相关知识学习上所存在的缺陷，也让我懂得了研究问题要从基础开始，分析处理问题一定要抓核心。</span><span class='green'>因此，在本次毕业论文将要止笔之际，谨向周老师和实验室全体师兄、师姐们致以最衷心的感谢！</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">706</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><a href='../sentence_detail/1065/1065.htm' target='right' class='orange' >最后，祝愿周老师身体健康，工作顺利，阖家欢乐！</a>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">707</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>参考文献</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">708</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[1]Mark Summerfield.</span><span class='green'>Rapid GUI Programming with Python and Qt[M].Publishing house of electronics industry， 2016.8.1.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">709</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[2]赵之珩. 勇气号和机遇号[J]. 青少年科技博览:</span><span class='green'>中学版， 2004(9):</span><span class='green'>4-5.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">710</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[3] 李向东， 鲁守银， 王宏，等. 一种智能巡检机器人的体系结构分析与设计[J]. 机器人， 2005， 27(6):</span><span class='green'>502-506.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">711</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[4]矫德余. 基于嵌入式系统的智能巡检机器人研制[D]. 中国石油大学， 2010.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">712</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[5] 肖鹏， 王海鹏， 曹雷，等. 变电站智能巡检机器人云台控制系统设计[J]. 制造业自动化， 2012， 34(1):</span><span class='green'>105-108.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">713</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[6] 王建元， 王娴， 陈永辉，等. 基于图论的电力巡检机器人智能寻迹方案[J]. 电力系统自动化， 2007， 31(9):</span><span class='green'>78-81.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">714</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[7]蔡焕青， 邵瑰玮， 文志科，等. 变电站智能巡检机器人应用研究现状[C]. 2015.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">715</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[8]Keerthana R ，， Jayashree.</span><span class='green'>N R J N R.</span><span class='green'>Ontology based Automatic Module Generation from E-book[J].</span><span class='green'>International Journal of Computer Applications， 2015， 120:</span><span class='green'>13-16..</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">716</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[9]黄雪梅， 范强， 魏修亭. 舵机控制用PWM信号的研究与实现[J]. 微计算机信息， 2010， 26(5):</span><span class='green'>28-30.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">717</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[10] 李方旭， 马彬瀚， 丁伟，等. 基于HC-SR04超声波传感器的智能避障小车设计[J]. 科技创新与应用， 2016(34):</span><span class='green'>26-27.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">718</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[11] 林倩.</span><span class='green'>DHT11数字温湿度传感器通信协议的IO模拟[J]. 信息通信， 2017(1):</span><span class='green'>206-207.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">719</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[12]Gary Bradski and Adrian Kaebler.</span><span class='green'>Learning OpenCV[M].O’Reilly Media，Inc.</span><span class='green'>2008.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">720</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[13] Lienhart R， Maydt J.</span><span class='green'>An extended set of Haar-like features for rapid object detection[C]. 2002:</span><span class='green'>I-900-I-903 vol.1.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">721</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[14] 林景亮， 唐杰. 一种融合肤色和Haar特征的人脸检测方法[J]. 微型机与应用， 2013， 32(8):</span><span class='green'>35-37.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">722</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[15]贾海鹏， 张云泉， 徐建良.</span><span class='green'>Research on Image Integral Algorithm Optimization Based on OpenCL基于OpenCL的图像积分图算法优化研究[J]. 计算机科学， 2013， 40(2):</span><span class='green'>1-7.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">723</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[16]李文娜. 基于Haar特征级联强分类器和肤色模型的人脸检测[J]. 辽宁石油化工大学学报， 2010， 30(3):</span><span class='green'>61-64.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">724</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[17]孙绪才，L298N在直流电机PWM调速系统中的应用[J].潍坊学院学报，2009，9（4）：</span><span class='green'>1671-4288.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">725</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[18]张子木. 基于Arduino的物联网接入技术的研究[D]. 北京工业大学， 2015.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">726</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[19]Warren Gay.</span><span class='green'>Mastering the Raspberry Pi[M].</span><span class='green'>Apress Media，2014.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">727</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[20]Rushi Gajjar.</span><span class='green'>Raspberry Pi Sensors[M].</span><span class='green'>China Machine Press， 2016.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">728</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[21]Bosch Sensortec.</span><span class='green'>BMP180 Digital pressure sensor[R].</span><span class='green'>Bosch，2013.</span>
+</p>
+</div>
+
+<div>
+<p>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td align="left" width="50"><div class="shubu">729</div></td>
+<td>&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+<span style="margin-left:25px"></span><span class='green'>[22] R Swathi， Vision Based Plant Leaf Disease Detection on The Color Segmentation through Fire Bird V Robot[J].2016.</span>
+</p>
+</div>
+
+
+<div>
+<span style="margin-left:25px"></span>
+[
+<a class="pagelink" href="paper_1.htm">首页</a>
+<a class="pagelink" href="paper_11.htm">上一页</a>
+<a class="pagelink" href="#">下一页</a>
+<a class="pagelink" href="paper_12.htm">尾页</a>
+页码：12/12页
+]
+</div>
+
+<br>
+<div style="margin-left:8px">
+
+<div style="text-align:center;background-color:#CA122C;margin-top:30px;overflow:hidden;">
+<a href="http://www.paperpass.com/publish/index?from=ppreport_banner" target="_blank" style="display:block;"><img height="180" src="http://file.paperpass.com/images/fabiao.jpg"></a>
+</div>
+
+</div>
+</div>
+
+
+<div class="zhengwencenter">
+<p>
+检测报告由<a href="http://www.paperpass.com/" target="_blank">PaperPass</a>文献相似度检测系统生成
+</p>
+<p>
+Copyright © 2007-2017 PaperPass
+</p>
+</div>
+<div style="margin-bottom:400px"></div>
+</body>
+</html>
