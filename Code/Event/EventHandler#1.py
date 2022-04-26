@@ -1,9 +1,11 @@
 class Eventsample(object): 
 	def __init__(self): 
 		self.__eventhandlersample = [] 
+	
 	def __iadd__(self, Ehandler): 
 		self.__eventhandlersample.append(Ehandler) 
 		return self
+	
 	def __isub__(self, Ehandler): 
 		self.__eventhandlersample.remove(Ehandler) 
 		return self
@@ -22,15 +24,15 @@ class MessToDisplay(object):
 class sampleclass(object) : 
 	
 	def __init__(self) : 
-		self.OnEH = Eventsample() 
+		self.OnEH = Eventsample()  # new --> __init__
 		
-	def Ehnew(self) : 
+	def Ehnew(self) : # --> . __call__
 		self.OnEH() 
 		
-	def anotherevent(self,objMeth): 
+	def anotherevent(self,objMeth): # += --> _iadd__
 		self.OnEH += objMeth 
 		
-	def nexteven(self,objMeth) : 
+	def nexteven(self,objMeth) : # -= --> __isub__
 		self.OnEH -= objMeth 
 
 def Simulation() : 

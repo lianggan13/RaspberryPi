@@ -1,10 +1,12 @@
 # DataClient1.py
 
+from builtins import print
 from threading import Thread
 import sys,time,_thread
 import datetime
 import socket
 import asyncio
+import uuid
 
 api_btn_state = "/api/btn/state"
 
@@ -14,14 +16,35 @@ def str2bytes(source):
 def bytes2str(source):
     return str(source, encoding ='utf-8')
 
+
+class Event(object): 
+	def __init__(self): 
+		self.__eventhandlers = [] 
+	
+	def __iadd__(self, Ehandler): 
+		self.__eventhandlers.append(Ehandler) 
+		return self
+	
+	def __isub__(self, Ehandler): 
+		self.__eventhandlers.remove(Ehandler) 
+		return self
+
+	def __call__(self, *args, **keywargs): 
+		for handler in self.__eventhandlers: 
+			handler(*args, **keywargs) 
+
 class TcpClient:
     """
     Tcp Client
 
     """    
     def __init__(self,ip="127.0.0.1",port=1918):
+        self._id = uuid.uuid4()
         self._ip = ip
         self._port = port
+        self.connected_event = Event()
+        self.disconnected_event = []
+        self.received_event = []
 
     def start(self):
         time.sleep(2)
@@ -47,6 +70,10 @@ class TcpClient:
             print("Connection failed: %s" % ex)
             return False
         print("Connection successed.")
+        # Client_Connected()
+        # for e in self.connected_event: 
+        #     e(self._id,self._ip,self._port)
+        self.connected_event(self._id,self._ip,self._port)
         return True  
 
     def start_recv(self):
@@ -104,8 +131,21 @@ class TcpClient:
 
 
 
+def handle_client_connected(id:str,ip:str,port:int):
+    print(f"√ client [{id}] {ip}:{port} connected.")
+
+def handle_client_disconnected(id:str,ip:str,port:int):
+    print(f"× client [{id}] {ip}:{port} diconnected.")
+
+def handle_client_received(id:str,ip:str,port:int,msg:str):
+    print(f"client [{id}] {ip}:{port} received: {msg}")
+
 if __name__ == "__main__":
     client = TcpClient("127.0.0.1",1918)
+    # client.Client_Connected = handle_client_connected
+    client.connected_event += handle_client_connected
+    client.disconnected_event.append(handle_client_disconnected)
+    client.received_event.append(handle_client_received)
     client.start()
     client.start_send()
     asyncio.get_event_loop().run_forever()

@@ -20,10 +20,10 @@ class MClass(EventSample):
         self.mess = mess
 	
     def __str__(self):
-        return "Message from other class: " + repr(self.mess)
+        return("Message from other class: " + repr(self.mess))
 	
 def echo(text):
-    print text
+    print(text)
 	
 MC = MClass("Sample text")
 MC.on("sample_event", echo)
