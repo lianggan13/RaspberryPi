@@ -293,7 +293,48 @@ sudo raspi-gpio get
 
 
 
-### Linux Command
+### Samba
+
+```
+sudo apt-get install samba samba-common-bin
+
+sudo vi /etc/samba/smb.conf
+    #======================= Share Definitions =======================
+
+    [homes]
+       comment = /home/pi
+       browseable = yes
+
+    # By default, the home directories are exported read-only. Change the
+    # next parameter to 'no' if you want to be able to write to them.
+       read only = no
+
+    # File creation mask is set to 0700 for security reasons. If you want to
+    # create files with group=rw permissions, set next parameter to 0775.
+       create mask = 0777
+
+    # Directory creation mask is set to 0700 for security reasons. If you want to
+    # create dirs. with group=rw permissions, set next parameter to 0775.
+       directory mask = 0777
+
+sudo /etc/init.d/smbd restart
+sudo /etc/init.d/samba-ad-dc restart
+
+sudo smbpasswd -a pi
+
+win10
+控制面板 >> 程序
+	启动或关闭Windows功能
+			>> SMB1.0/CIFS文件共享支持和SMB直通
+	
+Win+R >> regedit
+	\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
+		>>
+			AllowInsecureGuestAuth = 1
+
+```
+
+### Install
 
 ```
 # 安装包与软件
@@ -302,6 +343,75 @@ sudo apt install <package>
 apt-get --purge remove <package>
 # 删除没用的依赖包
 apt-get autoremove
+
+
+pip install
+pip uninstall
+
+```
+
+### TPYBoard-STM32
+
+```
+TPYBoard v102 micropython Python开发板 pyboard STM32F405
+
+http://www.tpyboard.com/pythoneditor/
+
+http://docs.tpyboard.com/zh/latest/
+
+REPL
+Putty
+>>> help()
+>>> help(pyb.LED)
+
+Ctrl + D
+
+出厂模式：按住usr键，按一下rst，然后led2和led3交替亮，当两个灯交替亮到三次，且均亮起时，松开usr
+USB－HID模式：编辑 boot.py 文件，去掉了pyb.usb_mode('CDC+HID')前的注释符
+安全模式：Usr + RST 按一下 等LED3 亮 松开 Usr
+
+
+
+```
+
+Keys: VSCode、Pymakr、Micropython IDE
+
+```
+Pymakr 
+pymakr.json
+
+{
+	"address": "COM3",
+	"username": "micro",
+	"password": "python",
+	"sync_folder": "/",
+	"open_on_start": false,
+	"sync_file_types": "py,txt,log,json,xml,html,js,css,mpy",
+	"ctrl_c_on_connect": false,
+	"safe_boot_on_upload": false,
+	"py_ignore": [
+		"pymakr.conf",
+		".vscode",
+		".gitignore",
+		".git",
+		"project.pymakr",
+		"env",
+		"venv"
+	],
+	"fast_upload": false,
+	"sync_all_file_types": false,
+	"auto_connect": true,
+	"autoconnect_comport_manufacturers": [
+		"Pycom",
+		"Pycom Ltd.",
+		"FTDI",
+		"Microsoft",
+		"Microchip Technology, Inc.",
+		"1a86"
+	]
+}
+
+Micropython IDE
 ```
 
 
