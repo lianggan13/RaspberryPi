@@ -74,9 +74,8 @@ def SensorTest():
         pyb.delay(1000)
 
 if __name__ == "__main__":
-    print("Loaded...........................")
     # SensorTest()
-    # lora = LoRa()
-    # lora.start_URAT6()
-    # lora.start_URAT1()
-    
+    lora = LoRa()
+    lora.start_URAT6()
+    lora.start_URAT1()
+    lora.Test()

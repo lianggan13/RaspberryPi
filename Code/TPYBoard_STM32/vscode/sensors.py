@@ -5,7 +5,7 @@ import pyb
 from pyb import *
 from pyb import UART, Pin, I2C, delay, udelay
 
-def Ao2Voltage(value,maxv=3.3,resolution=8):
+def Ao2Voltage(value,maxv=3.3,resolution=10):
     return value*(maxv*1000)/(2^resolution)
 
 class WaterLevel:
