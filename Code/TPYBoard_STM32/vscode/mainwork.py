@@ -76,6 +76,6 @@ def SensorTest():
 if __name__ == "__main__":
     # SensorTest()
     lora = LoRa()
-    lora.start_URAT6()
     lora.start_URAT1()
+    lora.start_URAT2()
     lora.Test()

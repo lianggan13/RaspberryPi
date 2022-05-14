@@ -15,7 +15,10 @@ GPIO.output(M0,GPIO.LOW)
 GPIO.output(M1,GPIO.LOW)
 
 #ser = serial.Serial("/dev/ttyAMA0",115200)
-ser = serial.Serial("/dev/ttyS0",115200,timeout=2)
+ser = serial.Serial("/dev/ttyS0",9600,timeout=2)
+ser.bytesize = 8 #8位数据位
+ser.parity=serial.PARITY_NONE#无校验
+ser.stopbits = 1        #停止位
 
 print("serial test start ...")
 ser.write("Hello Wrold !!!\n".encode("utf-8"))
@@ -25,5 +28,6 @@ try:
         ser.write(ser.read())
         print(".........")
 except KeyboardInterrupt:
+    GPIO.cleanup()
     if ser != None:
         ser.close()

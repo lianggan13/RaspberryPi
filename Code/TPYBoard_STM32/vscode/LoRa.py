@@ -30,30 +30,34 @@ class LoRa:
         pass
         # self.rtc = RTC()
 
+    def start_URAT1(self):
+        M0 = Pin(Pin.board.Y3, Pin.OUT_PP)
+        M1 = Pin(Pin.board.Y4, Pin.OUT_PP)
+        M0.low()
+        M1.low()
+        self.u1 = UART(1,9600)  
+        self.u1.init(9600, bits=8, parity=None, stop=1,timeout=3000)
+
+    def start_URAT2(self):
+        M0 = Pin(Pin.board.X5, Pin.OUT_PP)
+        M1 = Pin(Pin.board.X6, Pin.OUT_PP)
+        M0.low()
+        M1.low()
+        self.u2 = UART(2,9600)  
+        self.u2.init(9600, bits=8, parity=None, stop=1,timeout=3000)
+
     def start_URAT6(self):
         M0 = Pin(Pin.board.Y3, Pin.OUT_PP)
         M1 = Pin(Pin.board.Y4, Pin.OUT_PP)
         M0.low()
         M1.low()
         self.u6 = UART(6,9600)  
-        self.u6.init(9600, bits=8, parity=None, stop=1)  
+        self.u6.init(9600, bits=8, parity=None, stop=1,timeout=3)  
         
         # time.sleep(1)
         # self.rtc.wakeup(1000,lambda t: self.send())
     
-  
-
-    def start_URAT1(self):
-        M0 = Pin(Pin.board.X11, Pin.OUT_PP)
-        M1 = Pin(Pin.board.X12, Pin.OUT_PP)
-        M0.low()
-        M1.low()
-        self.u1 = UART(1,9600)  
-        self.u1.init(9600, bits=8, parity=None, stop=1,timeout=3)
         
-        time.sleep(2)
-        # self.recv()
-
 
     # def send(self):
     #         # (year, month, day, weekday, hours, minutes, seconds, subseconds)
@@ -66,41 +70,34 @@ class LoRa:
     #         self.u6.write('{ID:1,CMD:OnLine,DATA:ssss}')
 
     def Test(self):
-        # self.u6.write('{ID:1,CMD:OnLine,DATA:ssss}')
-        # time.sleep(1)
-        len = self.u6.any() # wait blocked
-        if(len > 0): 
-            print("data coming...")
-            print(self.u6.readline())
-
-        print("start recv...")
+        print("start test...")
         i = 0
         while True:
             d = '{ID:1,CMD:OnLine,DATA: %d}' % i
             print("send data... %s" % d)
-            n = self.u6.write(d)
+            n = self.u2.write(d)
             print("write done.")
             print(n)
             i +=1
-            time.sleep(2)
-            continue
-            len = self.u6.any()
+            time.sleep(1)
+            print("read data... %s" % self.u1.read()) 
+            len = self.u2.any()
             if(len > 0): 
-                print("read data... %s" % self.u6.read())   
+                print("read data... %s" % self.u1.read())   
             else:
                 print("No Data...")
-            time.sleep(2)
             print("--------------")
+            time.sleep(1)
 
-            continue
-            len = self.u1.any() # wait blocked
-            if(len > 0): 
-                print("data coming...")
-                print(self.u1.readline())
-                self.u6.write('{ID:1,CMD:OnLine,DATA:ssss}')
-                time.sleep(1)
-            else:
-                print("No Data...")
-                self.u6.write('{ID:1,CMD:OnLine,DATA:ssss}')
-            time.sleep(2)
+            # continue
+            # len = self.u1.any() # wait blocked
+            # if(len > 0): 
+            #     print("data coming...")
+            #     print(self.u1.readline())
+            #     self.u6.write('{ID:1,CMD:OnLine,DATA:ssss}')
+            #     time.sleep(1)
+            # else:
+            #     print("No Data...")
+            #     self.u6.write('{ID:1,CMD:OnLine,DATA:ssss}')
+            # time.sleep(2)
 

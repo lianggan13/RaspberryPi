@@ -27,7 +27,6 @@ def AccelDemo():
     xlignts = (LED(2),LED(3))
     ylights = (LED(1),LED(4))
 
-
     accel = Accel()
     while True:
         x = accel.x() # -30 ~ 30
