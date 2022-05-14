@@ -74,19 +74,17 @@ class LoRa:
         i = 0
         while True:
             d = '{ID:1,CMD:OnLine,DATA: %d}' % i
-            print("send data... %s" % d)
+            print("send data:  %s" % d)
             n = self.u2.write(d)
-            print("write done.")
-            print(n)
-            i +=1
+            print("write done. len = %s" % n)
             time.sleep(1)
-            print("read data... %s" % self.u1.read()) 
-            len = self.u2.any()
+            len = self.u1.any()
             if(len > 0): 
-                print("read data... %s" % self.u1.read())   
+                print("read data: %s. len = %s" % (self.u1.read(), len))   
             else:
-                print("No Data...")
+                print("read no Data...")
             print("--------------")
+            i += 1
             time.sleep(1)
 
             # continue
