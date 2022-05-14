@@ -68,21 +68,28 @@ class LoRa:
     def Test(self):
         # self.u6.write('{ID:1,CMD:OnLine,DATA:ssss}')
         # time.sleep(1)
-        len = self.u1.any() # wait blocked
+        len = self.u6.any() # wait blocked
         if(len > 0): 
             print("data coming...")
-            print(self.u1.readline())
+            print(self.u6.readline())
 
         print("start recv...")
         i = 0
         while True:
             d = '{ID:1,CMD:OnLine,DATA: %d}' % i
             print("send data... %s" % d)
-            n = self.u1.write(d)
+            n = self.u6.write(d)
+            print("write done.")
             print(n)
             i +=1
             time.sleep(2)
-            print(self.u6.read())
+            continue
+            len = self.u6.any()
+            if(len > 0): 
+                print("read data... %s" % self.u6.read())   
+            else:
+                print("No Data...")
+            time.sleep(2)
             print("--------------")
 
             continue
