@@ -78,6 +78,7 @@ class LoRa:
             n = self.u2.write(d)
             print("write done. len = %s" % n)
             time.sleep(1)
+            continue
             len = self.u1.any()
             if(len > 0): 
                 print("read data: %s. len = %s" % (self.u1.read(), len))   

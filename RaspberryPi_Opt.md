@@ -1,6 +1,19 @@
 ## Raspberry
 
-### Configure Static IP
+### Start
+
+Keys: rpi-imager
+
+```
+https://www.raspberrypi.com/software/
+```
+
+
+
+### Static IP
+
+Keys: dhcpcd.conf (方式1)
+
 ```py
 sudo vi /etc/dhcpcd.conf
 
@@ -17,7 +30,23 @@ static domain_name_servers=114.114.114.114
 或者 桌面右上角右击 wireless & Wired Network Setttings
 
 reboot
+
+sudo ifconfig eth0 192.168.1.179
 ```
+
+Keys: rc.local(方式2)
+
+```
+ sudo vi /etc/rc.local
+ 添加固定IP sudo ifconfig eth0 192.168.1.179
+ 操作系统启动时 会 自动调用 rc.local 脚本
+ 
+ 
+```
+
+
+
+
 
 	网络配置文件
 	sudo vi /etc/network/interfaces
@@ -415,6 +444,15 @@ Micropython IDE
 ```
 
 
+
+### Serial
+
+```
+ref links:
+https://www.waveshare.net/study/article-606-1.html
+
+https://chinacqzgp.blog.csdn.net/article/details/116663317?spm=1001.2101.3001.6661.1&depth_1-utm_relevant_index=1
+```
 
 
 
