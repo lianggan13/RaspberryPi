@@ -44,6 +44,7 @@ class  TcpServer:
     
     async def start(self):
         self._listenSock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # self._listenSock = socket.socket(socket.AddressFamily.AF_INET, socket.SOCK_STREAM)
         self._listenSock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
         try:
             self._listenSock.bind((self._ip, self._port))
@@ -60,6 +61,8 @@ class  TcpServer:
     def handle_listen(self):
         while True:
             sock, addr = self._listenSock.accept()
+            # sock.setblocking(0)
+            # sock.settimeout(5)
             host = "{0}:{1}".format(addr[0],addr[1])
             # sock.settimeout(5.0) # timeout 5s
             self._clients[host] = sock
@@ -95,11 +98,12 @@ class  TcpServer:
             else:
                 await asyncio.sleep(2)
     
-    async def recv_data(self,host) -> (str,str):
+    async def recv_data(self,host) -> (str):
+        print("ssss")
         bufSize = 4096
         data = ""
         sock = self._clients[host]
-        while data[-1:] != "\0": # reply with end-of-message indicator
+        while (data[-1:] != "\0") & (data[-1:] != '\n') : # reply with end-of-message indicator
             buffer = sock.recv(bufSize)
             if len(buffer) == 0:
                     break; 

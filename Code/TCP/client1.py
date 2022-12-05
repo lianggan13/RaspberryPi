@@ -34,7 +34,8 @@ def handle_exception(sender:TcpServer,exp:str):
 
 
 async def main():
-    client = TcpClient("127.0.0.1",1918)
+    # client = TcpClient("127.0.0.1",1918)
+    client = TcpClient("192.168.0.2",1918)
     client.connected_event += handle_client_connected
     client.disconnected_event += handle_client_disconnected
     client.received_event += handle_client_received
