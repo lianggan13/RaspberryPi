@@ -452,6 +452,38 @@ ref links:
 https://www.waveshare.net/study/article-606-1.html
 
 https://chinacqzgp.blog.csdn.net/article/details/116663317?spm=1001.2101.3001.6661.1&depth_1-utm_relevant_index=1
+
+ref link:
+https://blog.csdn.net/ShenZhen_zixian/article/details/119531639
+
+如果同时打开了端口和shell打印，就只能用于shell调试，不能当普通串口使用，不然会导致串口数据传输不稳定，偶尔出现乱码
+
+sudo apt-get install minicom
+
+
+USB转TTL的模块
+
+sudo apt-get install minicom
+
+1：输入crtl+A，再输入E，可以打开串口发送显示（默认是关闭显示的），再操作一遍则是隐藏显示。
+2：输入crtl+A，再输入Q，Enter，可以退出minicom窗口。
+
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+import serial
+
+#ser = serial.Serial("/dev/ttyAMA0",115200)
+ser = serial.Serial("/dev/ttyS0",115200)
+
+print("serial test start ...")
+ser.write("Hello Wrold !!!\n")
+try:
+    while True:
+        ser.write(ser.read())
+except KeyboardInterrupt:
+    if ser != None:
+        ser.close()
+
 ```
 
 
