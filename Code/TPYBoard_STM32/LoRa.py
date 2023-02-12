@@ -31,6 +31,7 @@ class LoRa:
         # self.rtc = RTC()
 
     def start_URAT1(self):
+        print("Start URAT1...")
         M0 = Pin(Pin.board.Y3, Pin.OUT_PP)
         M1 = Pin(Pin.board.Y4, Pin.OUT_PP)
         M0.low()
@@ -39,6 +40,7 @@ class LoRa:
         self.u1.init(9600, bits=8, parity=None, stop=1,timeout=3000)
 
     def start_URAT2(self):
+        print("Start URAT2...")
         M0 = Pin(Pin.board.X5, Pin.OUT_PP)
         M1 = Pin(Pin.board.X6, Pin.OUT_PP)
         M0.low()
@@ -47,6 +49,7 @@ class LoRa:
         self.u2.init(9600, bits=8, parity=None, stop=1,timeout=3000)
 
     def start_URAT6(self):
+        print("Start URAT6...")
         M0 = Pin(Pin.board.Y3, Pin.OUT_PP)
         M1 = Pin(Pin.board.Y4, Pin.OUT_PP)
         M0.low()
@@ -75,13 +78,14 @@ class LoRa:
         while True:
             d = '{ID:1,CMD:OnLine,DATA: %d}' % i
             print("send data:  %s" % d)
-            n = self.u2.write(d)
+            n = self.u6.write(d)
             print("write done. len = %s" % n)
-            time.sleep(1)
+            time.sleep(0.3)
             continue
-            len = self.u1.any()
+            #time.sleep(0.3)
+            len = self.u2.any()
             if(len > 0): 
-                print("read data: %s. len = %s" % (self.u1.read(), len))   
+                print("read data: %s. len = %s" % (self.u2.read(), len))   
             else:
                 print("read no Data...")
             print("--------------")
@@ -100,3 +104,11 @@ class LoRa:
             #     self.u6.write('{ID:1,CMD:OnLine,DATA:ssss}')
             # time.sleep(2)
 
+if __name__ == "__main__":
+    # SensorTest()
+    lora = LoRa()
+    # lora.start_URAT1()
+    lora.start_URAT2()
+    lora.start_URAT6()
+    time.sleep(1)
+    lora.Test()

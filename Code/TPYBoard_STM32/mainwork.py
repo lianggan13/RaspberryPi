@@ -27,6 +27,7 @@ def AccelDemo():
     xlignts = (LED(2),LED(3))
     ylights = (LED(1),LED(4))
 
+
     accel = Accel()
     while True:
         x = accel.x() # -30 ~ 30
@@ -73,9 +74,8 @@ def SensorTest():
         pyb.delay(1000)
 
 if __name__ == "__main__":
-    print("Loaded..........................")
     # SensorTest()
-    # lora = LoRa()
-    # lora.start_URAT6()
-    # lora.start_URAT1()
-    # lora.Test()
+    lora = LoRa()
+    #lora.start_URAT1()
+    lora.start_URAT2()
+    lora.Test()

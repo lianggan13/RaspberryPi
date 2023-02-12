@@ -8,7 +8,46 @@ Keys: rpi-imager
 https://www.raspberrypi.com/software/
 ```
 
+### Image
 
+Keys: sourelist --> aliyun
+
+```
+编辑 /etc/apt/sources.list 文件，这里推荐就用系统自带的 nano 命令编辑，命令如下：
+sudo nano /etc/apt/sources.list
+
+进入编辑界面，删除原有的内容，粘贴如下内容：
+deb http://mirrors.aliyun.com/raspbian/raspbian/ bullseye  main non-free contrib rpi
+deb-src http://mirrors.aliyun.com/raspbian/raspbian/ bullseye main non-free contrib rpi
+
+更新软件索引清单
+sudo apt-get update
+
+比较索引清单更新依赖关系
+sudo apt-get upgrade -y
+```
+
+
+
+### Vim
+
+Keys: install & configure vim
+
+```
+dd		删除
+yy		复制
+p		粘贴
+u		撤销	(windows Ctrl z)
+Ctrl r	反撤销	(windows Ctrl y)
+
+sudo apt install vim
+sudo vi /etc/vim/vimrc
+set nu  #显示行号
+syntax on  #语法高亮
+set tabstop=4  #tab退四格
+```
+
+### 
 
 ### Static IP
 
@@ -44,32 +83,11 @@ Keys: rc.local(方式2)
  
 ```
 
+Keys: 网络配置文件
 
-
-
-
-	网络配置文件
 	sudo vi /etc/network/interfaces
 	sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
 	sudo vi /etc/dhcpcd.conf
-
-### Vim
-
-Keys: install & configure vim
-
-```
-dd		删除
-yy		复制
-p		粘贴
-u		撤销	(windows Ctrl z)
-Ctrl r	反撤销	(windows Ctrl y)
-
-sudo apt install vim
-sudo vi /etc/vim/vimrc
-set nu  #显示行号
-syntax on  #语法高亮
-set tabstop=4  #tab退四格
-```
 
 ### Route
 
@@ -135,11 +153,16 @@ Keys: SSH、Python
 	sudo chmod 777 .ssh/authorized_keys
 	sudo chmod 700 -R .ssh
 
-8.sudo vi /etc/ssh/sshd_config:
+8.sudo vi /etc/ssh/sshd_config
 	PermitRootLogin yes
-	RSAAuthentication yes
 	PubkeyAuthentication yes
 	AuthorizedKeysFile .ssh/authorized_keys
+
+9.再次 ssh-keygen -t rsa -b 4096
+
+10.添加 ssh-key to Github
+
+11.git clone git@github.com:lianggan13/RaspberryPi.git
 ```
 
 Keys: Visual Stuido Code
@@ -379,9 +402,13 @@ pip uninstall
 
 ```
 
-### TPYBoard-STM32
+## TPYBoard-STM32
 
 ```
+
+102资料下载
+http://www.tpyboard.com/download/data/182.html
+
 TPYBoard v102 micropython Python开发板 pyboard STM32F405
 
 http://www.tpyboard.com/pythoneditor/
@@ -393,7 +420,7 @@ Putty
 >>> help()
 >>> help(pyb.LED)
 
-Ctrl + D
+Ctrl + D 软重启
 
 出厂模式：按住usr键，按一下rst，然后led2和led3交替亮，当两个灯交替亮到三次，且均亮起时，松开usr
 USB－HID模式：编辑 boot.py 文件，去掉了pyb.usb_mode('CDC+HID')前的注释符
@@ -460,6 +487,9 @@ https://blog.csdn.net/ShenZhen_zixian/article/details/119531639
 
 sudo apt-get install minicom
 
+sudo vim /boot/config.txt
+在最后一行添加 dtoverlay=pi3-miniuart-bt
+sudo minicom -D /dev/ttyAMA0 -b115200
 
 USB转TTL的模块
 
@@ -484,11 +514,15 @@ except KeyboardInterrupt:
     if ser != None:
         ser.close()
 
+
+sudo usermod -aG　dialout pi
 ```
 
 
 
+## Github
 
+Smart-IoT-Planting-System
 
 Pioneer600
 	使用教程 https://www.waveshare.net/wiki/Pioneer600
