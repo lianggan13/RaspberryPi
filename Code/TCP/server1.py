@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 
 P_BUTTON = 20 # key button pin
 api_btn_state = "/api/btn/state"
-server = TcpServer("127.0.0.1",1918)
+server = TcpServer("192.168.0.9",32769)
 
 def setup():
     GPIO.setmode(GPIO.BCM)
@@ -54,5 +54,26 @@ async def main():
     
 
 if __name__ == "__main__":
+    asyncio.get_event_loop().run_until_complete(main())
+    asyncio.get_event_loop().run_forever()
+
+    print("嗨客网(www.haicoder.net)")
+    host = "192.168.0.9"
+    port = 32769
+    sock = socket.socket()
+    addr = (host, port)
+    sock.bind(addr)
+    sock.listen(5)
+    while True:
+        print("Server wait to accept")
+        c, conn_addr = sock.accept()
+        while True:
+            c.recvmsg()
+            recv_data = c.recv(1024)
+            print("recv from client :", recv_data)
+            str = 'send from server'
+            c.send(str.encode())
+        c.close()
+
     asyncio.get_event_loop().run_until_complete(main())
     asyncio.get_event_loop().run_forever()
