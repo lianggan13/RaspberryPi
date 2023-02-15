@@ -4,13 +4,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>5a3c6887-72e7-445f-bf59-17a4e64cbbd7</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Raspberry.Server.py</StartupFile>
+    <StartupFile>Program.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <Name>Raspberry.Server</Name>
     <RootNamespace>Raspberry.Server</RootNamespace>
+    <IsWindowsApplication>False</IsWindowsApplication>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +22,13 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Raspberry.Server.py" />
+    <Compile Include="Program.py" />
+    <Compile Include="TCP\client1.py" />
+    <Compile Include="TCP\server1.py" />
+    <Compile Include="TCP\socketcom.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TCP\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
