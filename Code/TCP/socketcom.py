@@ -75,20 +75,20 @@ class  TcpServer:
 
     async def handle_recv(self):
         while True:
-            publish_tasks = []
+            recvedArray = []
 
             if len(self._clients) > 0:
                 for h in list(self._clients.keys()): # dictionary changed size during iteration
-                    publish_tasks.append(
+                    recvedArray.append(
                         asyncio.Task(
                             self.recv_data(h)
                         )
                     )
 
-            if publish_tasks:
+            if recvedArray:
                 # await asyncio.wait(publish_tasks)
-                result = await asyncio.gather(*publish_tasks)
-                for r in list(result):
+                recved = await asyncio.gather(*recvedArray)
+                for r in list(recved):
                     h = r[0]
                     d = r[1]
                     if(len(d) == 0):
@@ -96,18 +96,18 @@ class  TcpServer:
                     else:
                         self.received_event(self,h,d)
             else:
-                await asyncio.sleep(2)
+                await asyncio.sleep(1)
     
     async def recv_data(self,host) -> (str):
-        print("ssss")
         bufSize = 4096
         data = ""
         sock = self._clients[host]
-        while (data[-1:] != "\0") & (data[-1:] != '\n') : # reply with end-of-message indicator
+        try:
             buffer = sock.recv(bufSize)
-            if len(buffer) == 0:
-                    break; 
-            data += bytes2str(buffer)
+            if len(buffer) != 0:
+                data += bytes2str(buffer)
+        except ConnectionResetError as ex:
+                print(ex)
         return (host,data)
 
     def start_send(self):

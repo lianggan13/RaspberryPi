@@ -30,8 +30,7 @@ def handle_client_disconnected(sender:TcpServer,host:str):
     print ("× disConnected with client at %s" % host)
 
 def handle_client_received(sender:TcpServer,host:str,msg:str):
-    # print(f"client [{id}] {ip}:{port} received: {msg}")
-    print("Received: %s len: %s from [%s] %s" % (msg, str(len(msg)),host,
+    print(">> %s len: %s from [%s] %s" % (msg, str(len(msg)),host,
                         datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
     if msg[:-1]== api_btn_state:  # remove trailing "\0"
             if GPIO.input(P_BUTTON) == GPIO.LOW:
@@ -54,26 +53,5 @@ async def main():
     
 
 if __name__ == "__main__":
-    asyncio.get_event_loop().run_until_complete(main())
-    asyncio.get_event_loop().run_forever()
-
-    print("嗨客网(www.haicoder.net)")
-    host = "192.168.0.9"
-    port = 32769
-    sock = socket.socket()
-    addr = (host, port)
-    sock.bind(addr)
-    sock.listen(5)
-    while True:
-        print("Server wait to accept")
-        c, conn_addr = sock.accept()
-        while True:
-            c.recvmsg()
-            recv_data = c.recv(1024)
-            print("recv from client :", recv_data)
-            str = 'send from server'
-            c.send(str.encode())
-        c.close()
-
     asyncio.get_event_loop().run_until_complete(main())
     asyncio.get_event_loop().run_forever()
