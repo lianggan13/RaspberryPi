@@ -48,9 +48,12 @@ namespace Raspberry.Client.Services
                 while (true)
                 {
                     Array.Clear(readBuffer, 0, ReadBufferSize);
-                    int read = await netStream.ReadAsync(readBuffer, 0, ReadBufferSize);
-                    string receivedLine = Encoding.UTF8.GetString(readBuffer, 0, read);
-                    Received?.Invoke(this, receivedLine);
+                    if (netStream.CanRead)
+                    {
+                        int read = await netStream.ReadAsync(readBuffer, 0, ReadBufferSize);
+                        string receivedLine = Encoding.UTF8.GetString(readBuffer, 0, read);
+                        Received?.Invoke(this, receivedLine);
+                    }
                 }
             }
             catch (OperationCanceledException ex)
