@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding:UTF-8 -*-
+from ast import Str
 import RPi.GPIO as GPIO
 import time
 INT1 = 29
@@ -14,7 +15,7 @@ GPIO.setwarnings(False)
 #M1 左电机 INT1 INT2 TOU1 TOU2
 #M2 右电机 INT3 INT4 TOU3 TOU4
 
-class MotorCar:
+class MotorWheel:
 	def __init__(self):
 		GPIO.setmode(GPIO.BOARD)
 		GPIO.setup(INT1,GPIO.OUT)
@@ -54,29 +55,26 @@ class MotorCar:
 		GPIO.output(INT3,GPIO.LOW)
 		GPIO.output(INT4,GPIO.LOW)
 
-	def SendCommand(self,cmd):
+	def SendCommand(self,cmd:str):
 		try:
-			if(cmd == 'w' or cmd == 'W'):
+			if(cmd.upper() == 'W'):
 				self.Forward()
-			elif(cmd == 's' or cmd == 'S'):
+			elif(cmd.upper() == 'S'):
 				self.Back()
-			elif(cmd == 'a' or cmd == 'A'):
+			elif(cmd.upper() == 'A'):
 				self.Left()
-			elif(cmd == 'd' or cmd == 'D'):
+			elif(cmd.upper() == 'D'):
 				self.Right()
-			elif(cmd == 'f' or cmd == 'F'):
-				self.light()
-			elif(cmd == '0'):
+			elif(cmd.upper() == 'P'):
 				self.Stop()
 		except KeyboardInterrupt: 
-			pass
 			GPIO.cleanup()
 
 if __name__ == "__main__":
 	try:
-		car = MotorCar()
+		wheel = MotorWheel()
 		while True:
 			data = input(">>")# raw_input(">>")
-			car.SendCommand(data)
+			wheel.SendCommand(data)
 	except KeyboardInterrupt: 
 		GPIO.cleanup()

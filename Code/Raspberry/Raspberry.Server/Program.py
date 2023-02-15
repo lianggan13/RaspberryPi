@@ -1,4 +1,7 @@
+#!/usr/bin/python3
+# -*- coding:UTF-8 -*-
 from TCP.socketcom import *
+from L298N.MotorWheel import *
 from threading import Thread
 import sys,time,_thread
 import datetime
@@ -10,6 +13,7 @@ import RPi.GPIO as GPIO
 P_BUTTON = 20 # key button pin
 api_btn_state = "/api/btn/state"
 server = TcpServer("192.168.0.9",32769)
+wheel = MotorWheel()
 
 def setup():
     GPIO.setmode(GPIO.BCM)
@@ -19,6 +23,8 @@ def setup():
 def button_state_changed(args):
     state = "Button pressed"
     data = f"Push current state: {state}"
+    if GPIO.input(P_BUTTON) == GPIO.LOW:
+        pass
     for h in list(server._clients.keys()): # dictionary changed size during iteration
         server.send_data(h,data)
 
@@ -32,19 +38,13 @@ def handle_client_disconnected(sender:TcpServer,host:str):
 def handle_client_received(sender:TcpServer,host:str,msg:str):
     print(">> %s len: %s from [%s] %s" % (msg, str(len(msg)),host,
                         datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
-    if msg[:-1]== api_btn_state:  # remove trailing "\0"
-            if GPIO.input(P_BUTTON) == GPIO.LOW:
-                data = "Button pressed"
-            else:
-                data = "Button released"
-            sender.send_data(host,data)
+    #wheel.SendCommand(msg);
 
 def handle_exception(sender:TcpServer,exp:str):
     print (exp)
 
 
 async def main():
-    setup()
     server.connected_event += handle_client_connected
     server.disconnected_event += handle_client_disconnected
     server.received_event += handle_client_received

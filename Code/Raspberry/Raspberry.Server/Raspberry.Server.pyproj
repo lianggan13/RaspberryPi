@@ -22,12 +22,14 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="L298N\MotorWheel.py" />
     <Compile Include="Program.py" />
     <Compile Include="TCP\client1.py" />
     <Compile Include="TCP\server1.py" />
     <Compile Include="TCP\socketcom.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="L298N\" />
     <Folder Include="TCP\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

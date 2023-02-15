@@ -20,15 +20,6 @@ namespace Raspberry.Client.ViewModels
         }
         public DelegateCommand<object> PressKeyCommand => new DelegateCommand<object>(PressKey);
 
-        private void PressKey(object para)
-        {
-            Button btn = para as Button;
-            if (!btn.IsFocused)
-                btn.Focus();
-
-            Debug.WriteLine($"{nameof(PressKey)}:{btn.Content}");
-            socketClient.Send($"{nameof(PressKey)}:{btn.Content}");
-        }
 
 
         public MainViewModel()
@@ -42,6 +33,17 @@ namespace Raspberry.Client.ViewModels
             socketClient.Connect("192.168.0.9", 32769);
         }
 
+        private void PressKey(object para)
+        {
+            Button btn = para as Button;
+            if (!btn.IsFocused)
+                btn.Focus();
+
+            Debug.WriteLine($"{nameof(PressKey)}:{btn.Content}");
+            socketClient.Send($"{btn.Content}");
+        }
+
+
         public void Btn_KeyUp(object sender, KeyEventArgs e)
         {
             if (sender is Button btn)
@@ -49,7 +51,7 @@ namespace Raspberry.Client.ViewModels
                 if ((Key)btn.Content == e.Key)
                 {
                     Debug.WriteLine($"{nameof(Btn_KeyUp)}:{e.Key}");
-                    socketClient.Send($"{nameof(Btn_KeyUp)}:{e.Key}");
+                    socketClient.Send($"P");
                 }
             }
             e.Handled = true;
