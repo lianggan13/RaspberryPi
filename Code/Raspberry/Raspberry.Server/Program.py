@@ -1,11 +1,10 @@
-from socketcom import *
+from TCP.socketcom import *
 from threading import Thread
 import sys,time,_thread
 import datetime
 import socket
 import asyncio
 import RPi.GPIO as GPIO
-import TCP.socketcom
 
 
 P_BUTTON = 20 # key button pin
@@ -25,10 +24,10 @@ def button_state_changed(args):
 
 
 def handle_client_connected(sender:TcpServer,host:str):
-    print ("¡Ì connected with client at %s" % host)
+    print ("âˆš connected with client at %s" % host)
 
 def handle_client_disconnected(sender:TcpServer,host:str):
-    print ("¡Á disConnected with client at %s" % host)
+    print ("Ã— disConnected with client at %s" % host)
 
 def handle_client_received(sender:TcpServer,host:str,msg:str):
     print(">> %s len: %s from [%s] %s" % (msg, str(len(msg)),host,
