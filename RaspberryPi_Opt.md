@@ -518,6 +518,76 @@ except KeyboardInterrupt:
 sudo usermod -aG　dialout pi
 ```
 
+### ESP8266
+
+[ESP8266 调试教程一（STA模式）（详细图文） - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/164115983)
+
+```
+测试连通性
+AT 
+```
+
+Keys: STA 模式
+
+```
+查看当前模式
+AT+CWMODE? 
+设置当前为 STA 模式
+AT+CWMODE=1
+查看 当前可以查询到的 Wifi 列表
+AT+CWLAP
+连接 Wifi 模式下的参数：WIFI 名称，密码
+AT+CWJAP="LG_ESP","G15608212470*"
+
+查看被 分配的 ip
+AT+CIFSR
+
+断开 Wifi
+AT+CWQAP
+
+连接 TCP 服务器
+AT+CIPSTART="TCP","192.168.1.1",8989
+
+使能数据的透传模式
+AT+CIPMODE=1
+
+发送数据
+AT+CIPSEND
+
+退出数据传输(不能带回车换行符,串口调试助手上的回车换行 √ 去掉)
++++
+
+关闭透传模式
+AT+CIPMODE=0
+
+关闭 TCP 连接
+AT+CIPCLOSE
+```
+
+Keys: AP 模式
+
+```
+查看当前模式
+AT+CWMODE? 
+设置当前为 AP 模式
+AT+CWMODE=2 
+查看 AP 模式下的参数
+AT+CWSAP? 
+设置 AP 模式下的参数：WIFI 名称，密码，通道号，加密方式，允许接入 Station 个数(0~8)
+AT+CWSAP="LG_ESP","G15608212470*",1,3,4
+
+使能多连接模式
+AT+CIPMUX=1
+创建 TCP 服务器，默认端口为 333
+AT+CIPSERVER=1
+
+查看 ESP8266 创建 TCP 服务器时的 IP
+AT+CIPAP?
+向客户端发送数据
+先发送指令：AT+CIPSEND=ID,数据长度
+再发送数据
+```
+
 
 
 ## Github
