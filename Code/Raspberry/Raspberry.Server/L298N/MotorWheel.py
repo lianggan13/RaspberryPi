@@ -23,7 +23,7 @@ class MotorWheel:
 		GPIO.setup(INT3,GPIO.OUT)
 		GPIO.setup(INT4,GPIO.OUT)
 		GPIO.setup(B1,GPIO.OUT)
-		self.stop()
+		self.Stop()
 	
 	def Forward(self):#M1 M2 正转
 		GPIO.output(INT1,GPIO.HIGH)
@@ -33,7 +33,7 @@ class MotorWheel:
 
 	def Back(self):#M1 M2 反转
 		GPIO.output(INT1,GPIO.LOW)
-		GPIO.output(INT2,GPIO.HIGHw)
+		GPIO.output(INT2,GPIO.HIGH)
 		GPIO.output(INT3,GPIO.LOW)
 		GPIO.output(INT4,GPIO.HIGH)
 

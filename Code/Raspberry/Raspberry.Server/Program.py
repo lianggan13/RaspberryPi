@@ -2,6 +2,7 @@
 # -*- coding:UTF-8 -*-
 from TCP.socketcom import *
 from L298N.MotorWheel import *
+from SG90.CameraTerrace import *
 from threading import Thread
 import sys,time,_thread
 import datetime
@@ -14,6 +15,7 @@ P_BUTTON = 20 # key button pin
 api_btn_state = "/api/btn/state"
 server = TcpServer("192.168.0.9",32769)
 wheel = MotorWheel()
+terrace = CameraTerrace()
 
 def setup():
     GPIO.setmode(GPIO.BCM)
@@ -38,7 +40,8 @@ def handle_client_disconnected(sender:TcpServer,host:str):
 def handle_client_received(sender:TcpServer,host:str,msg:str):
     print(">> %s len: %s from [%s] %s" % (msg, str(len(msg)),host,
                         datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
-    #wheel.SendCommand(msg);
+    #wheel.SendCommand(msg)
+    terrace.SendCmd(msg)
 
 def handle_exception(sender:TcpServer,exp:str):
     print (exp)
