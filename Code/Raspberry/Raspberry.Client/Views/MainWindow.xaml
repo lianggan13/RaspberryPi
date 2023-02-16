@@ -57,149 +57,141 @@
     </Window.InputBindings>
 
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontSize" Value="23" />
+                <Setter Property="Width" Value="68" />
+                <Setter Property="Height" Value="35" />
+                <Style.Triggers>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Opacity" Value="0.5" />
+                    </Trigger>
+
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
         <!--<ContentControl prism:RegionManager.RegionName="ContentRegion" />-->
-        <Grid
-            Width="300"
-            Height="180"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="5" />
-                    <Setter Property="FontSize" Value="23" />
-                    <Style.Triggers>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Opacity" Value="0.5" />
-                        </Trigger>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Image Source="{Binding Img}" />
 
-                    </Style.Triggers>
-                </Style>
-            </Grid.Resources>
-            <Button
-                x:Name="btnW"
-                Grid.Row="0"
-                Grid.Column="1"
-                Content="{x:Static input:Key.W}">
-                <Interactivity:Interaction.Triggers>
-                    <Interactivity:EventTrigger EventName="KeyUp">
-                        <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
-                    </Interactivity:EventTrigger>
-                </Interactivity:Interaction.Triggers>
-            </Button>
-            <Button
-                x:Name="btnA"
-                Grid.Row="1"
-                Grid.Column="0"
-                Content="{x:Static input:Key.A}">
-                <Interactivity:Interaction.Triggers>
-                    <Interactivity:EventTrigger EventName="KeyUp">
-                        <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
-                    </Interactivity:EventTrigger>
-                </Interactivity:Interaction.Triggers>
-            </Button>
-            <Button
-                x:Name="btnS"
-                Grid.Row="1"
-                Grid.Column="1"
-                Content="{x:Static input:Key.S}">
-                <Interactivity:Interaction.Triggers>
-                    <Interactivity:EventTrigger EventName="KeyUp">
-                        <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
-                    </Interactivity:EventTrigger>
-                </Interactivity:Interaction.Triggers>
-            </Button>
-            <Button
-                x:Name="btnD"
-                Grid.Row="1"
-                Grid.Column="2"
-                Content="{x:Static input:Key.D}">
-                <Interactivity:Interaction.Triggers>
-                    <Interactivity:EventTrigger EventName="KeyUp">
-                        <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
-                    </Interactivity:EventTrigger>
-                </Interactivity:Interaction.Triggers>
-            </Button>
+        <Grid Grid.Row="1">
+            <Grid HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button
+                    x:Name="btnW"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Content="{x:Static input:Key.W}">
+                    <Interactivity:Interaction.Triggers>
+                        <Interactivity:EventTrigger EventName="KeyUp">
+                            <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
+                        </Interactivity:EventTrigger>
+                    </Interactivity:Interaction.Triggers>
+                </Button>
+                <Button
+                    x:Name="btnA"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="{x:Static input:Key.A}">
+                    <Interactivity:Interaction.Triggers>
+                        <Interactivity:EventTrigger EventName="KeyUp">
+                            <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
+                        </Interactivity:EventTrigger>
+                    </Interactivity:Interaction.Triggers>
+                </Button>
+                <Button
+                    x:Name="btnS"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Content="{x:Static input:Key.S}">
+                    <Interactivity:Interaction.Triggers>
+                        <Interactivity:EventTrigger EventName="KeyUp">
+                            <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
+                        </Interactivity:EventTrigger>
+                    </Interactivity:Interaction.Triggers>
+                </Button>
+                <Button
+                    x:Name="btnD"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Content="{x:Static input:Key.D}">
+                    <Interactivity:Interaction.Triggers>
+                        <Interactivity:EventTrigger EventName="KeyUp">
+                            <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
+                        </Interactivity:EventTrigger>
+                    </Interactivity:Interaction.Triggers>
+                </Button>
+            </Grid>
+
+            <Grid HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button
+                    x:Name="btnUp"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Content="{x:Static input:Key.Up}">
+                    <Interactivity:Interaction.Triggers>
+                        <Interactivity:EventTrigger EventName="KeyUp">
+                            <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
+                        </Interactivity:EventTrigger>
+                    </Interactivity:Interaction.Triggers>
+                </Button>
+                <Button
+                    x:Name="btnLeft"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="{x:Static input:Key.Left}">
+                    <Interactivity:Interaction.Triggers>
+                        <Interactivity:EventTrigger EventName="KeyUp">
+                            <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
+                        </Interactivity:EventTrigger>
+                    </Interactivity:Interaction.Triggers>
+                </Button>
+                <Button
+                    x:Name="btnDown"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Content="{x:Static input:Key.Down}">
+                    <Interactivity:Interaction.Triggers>
+                        <Interactivity:EventTrigger EventName="KeyUp">
+                            <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
+                        </Interactivity:EventTrigger>
+                    </Interactivity:Interaction.Triggers>
+                </Button>
+                <Button
+                    x:Name="btnRight"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Content="{x:Static input:Key.Right}">
+                    <Interactivity:Interaction.Triggers>
+                        <Interactivity:EventTrigger EventName="KeyUp">
+                            <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
+                        </Interactivity:EventTrigger>
+                    </Interactivity:Interaction.Triggers>
+                </Button>
+            </Grid>
         </Grid>
 
-        <Grid
-            Width="300"
-            Height="180"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="5" />
-                    <Setter Property="FontSize" Value="23" />
-                    <Style.Triggers>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Opacity" Value="0.5" />
-                        </Trigger>
-
-                    </Style.Triggers>
-                </Style>
-            </Grid.Resources>
-            <Button
-                x:Name="btnUp"
-                Grid.Row="0"
-                Grid.Column="1"
-                Content="{x:Static input:Key.Up}">
-                <Interactivity:Interaction.Triggers>
-                    <Interactivity:EventTrigger EventName="KeyUp">
-                        <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
-                    </Interactivity:EventTrigger>
-                </Interactivity:Interaction.Triggers>
-            </Button>
-            <Button
-                x:Name="btnLeft"
-                Grid.Row="1"
-                Grid.Column="0"
-                Content="{x:Static input:Key.Left}">
-                <Interactivity:Interaction.Triggers>
-                    <Interactivity:EventTrigger EventName="KeyUp">
-                        <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
-                    </Interactivity:EventTrigger>
-                </Interactivity:Interaction.Triggers>
-            </Button>
-            <Button
-                x:Name="btnDown"
-                Grid.Row="1"
-                Grid.Column="1"
-                Content="{x:Static input:Key.Down}">
-                <Interactivity:Interaction.Triggers>
-                    <Interactivity:EventTrigger EventName="KeyUp">
-                        <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
-                    </Interactivity:EventTrigger>
-                </Interactivity:Interaction.Triggers>
-            </Button>
-            <Button
-                x:Name="btnRight"
-                Grid.Row="1"
-                Grid.Column="2"
-                Content="{x:Static input:Key.Right}">
-                <Interactivity:Interaction.Triggers>
-                    <Interactivity:EventTrigger EventName="KeyUp">
-                        <Interaction:CallMethodAction MethodName="Btn_KeyUp" TargetObject="{Binding .}" />
-                    </Interactivity:EventTrigger>
-                </Interactivity:Interaction.Triggers>
-            </Button>
-        </Grid>
     </Grid>
 </Window>
