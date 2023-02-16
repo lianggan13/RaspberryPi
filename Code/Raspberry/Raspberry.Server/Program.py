@@ -9,7 +9,7 @@ import datetime
 import socket
 import asyncio
 import RPi.GPIO as GPIO
-
+import picamera
 
 P_BUTTON = 20 # key button pin
 api_btn_state = "/api/btn/state"
@@ -46,13 +46,28 @@ def handle_client_received(sender:TcpServer,host:str,msg:str):
 def handle_exception(sender:TcpServer,exp:str):
     print (exp)
 
+def TestCamera():
+    camera = picamera.PiCamera()
+    camera.resolution = (300, 200)
+    camera.vflip = True
+    camera.hflip = True
+    #os.system("raspistill -o imgCSI.jpg -t 50 -w 300 -h 200 -rot 180")
+    #with picamera.PiCamera() as camera:
+    camera.capture("imgCSI.jpg")
+    #fhead=os.path.getsize('imgCSI.jpg')
+    #with open('imgCSI.jpg','rb') as fp:
+    #	for data in fp:
+    #		connfd.send(data)
+    #time.sleep(0.05)
 
 async def main():
+    TestCamera()
     server.connected_event += handle_client_connected
     server.disconnected_event += handle_client_disconnected
     server.received_event += handle_client_received
     server.exception_event += handle_exception
-    await server.start()
+    #await server.start()
+
     
 
 if __name__ == "__main__":
