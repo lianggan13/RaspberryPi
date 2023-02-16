@@ -121,15 +121,20 @@ class  TcpServer:
             time.sleep(2)
 
     def send_data(self,host,data):
+        if(host in self._clients.keys()) == False:
+            return
         sock = self._clients[host]
         try:
             # append \0 as end-of-message indicator
-            sock.sendall(str2bytes(data + "\0"))
+            # sock.sendall(str2bytes(data + "\0"))
+            sock.sendall(data)
         except Exception as ex:
             self.exception_event(self,f"Send failed: {str(ex)}")
             self.close_client(host)
 
     def close_client(self,host):
+        if(host in self._clients.keys()) == False:
+            return
         sock = self._clients[host]
         del self._clients[host]
         sock.close()
