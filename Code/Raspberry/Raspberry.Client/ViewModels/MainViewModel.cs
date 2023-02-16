@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using Raspberry.Client.Services;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -29,8 +30,20 @@ namespace Raspberry.Client.ViewModels
 
         public void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            socketClient = new SocketClient();
-            socketClient.Connect("192.168.0.9", 32769);
+            Task.Run(() =>
+            {
+                socketClient = new SocketClient();
+                socketClient.Connect("192.168.0.9", 32769);
+
+                try
+                {
+
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.Fail(ex.ToString());
+                }
+            });
         }
 
         private void PressKey(object para)

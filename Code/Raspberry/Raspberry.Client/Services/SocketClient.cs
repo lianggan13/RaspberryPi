@@ -27,14 +27,13 @@ namespace Raspberry.Client.Services
 
         public void Send(string data)
         {
-            if (netStream.CanWrite)
+            if (netStream?.CanWrite == true)
             {
                 //data = $"{data} {DateTime.Now:yyyy MM dd HH:mm:ss}";
                 byte[] buffer = Encoding.UTF8.GetBytes($"{data}");
                 netStream.Write(buffer, 0, buffer.Length);
+                netStream.Flush();
             }
-
-            netStream.Flush();
         }
 
         private async void Receiver()
@@ -54,6 +53,7 @@ namespace Raspberry.Client.Services
                         string receivedLine = Encoding.UTF8.GetString(readBuffer, 0, read);
                         Received?.Invoke(this, receivedLine);
                     }
+                    await Task.Delay(500).ConfigureAwait(true);
                 }
             }
             catch (OperationCanceledException ex)
