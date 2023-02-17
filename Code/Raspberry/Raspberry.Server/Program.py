@@ -63,6 +63,7 @@ def TestCamera():
         while True:
             stream = io.BytesIO()
             for foo in camera.capture_continuous(stream,format='jpeg',use_video_port=True):
+                time.sleep(0.2)
                 # Truncate the stream to the current position (in case
                 # prior iterations output a longer image)
                 stream.seek(0)
@@ -85,7 +86,6 @@ def TestCamera():
 
                 stream.seek(0)
                 stream.truncate()
-        time.sleep(0.2)
           
            
 
