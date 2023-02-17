@@ -10,6 +10,7 @@ namespace Raspberry.Client.Views
         public MainWindow()
         {
             InitializeComponent();
+
         }
     }
 }

@@ -1,9 +1,13 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
+using Raspberry.Client.AttachedProperties;
 using Raspberry.Client.Services;
 using Raspberry.Client.Utils;
+using Raspberry.Client.Views;
 using System;
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,31 +58,25 @@ namespace Raspberry.Client.ViewModels
                 }
             });
         }
-        int index = 0;
+
         private void SocketClient_Received(object arg1, byte[] data)
         {
             try
             {
-                //Bitmap bitmap = ImageHelper.Buffer2Bitmap(data.ToArray());
-                //System.Drawing.Image t_img = ImageHelper.AddTextToImg(bitmap, $"{DateTime.Now:HH:mm:ss}", 12.0f, bitmap.Width - 10, bitmap.Height - 10, 120, ImageFormat.Jpeg);
-                //t_img.Save($"{++index}.jpeg", ImageFormat.Jpeg);
+                Bitmap bitmap = ImageHelper.Buffer2Bitmap(data);
+                System.Drawing.Image t_img = ImageHelper.AddTextToImg(bitmap, $"{DateTime.Now:HH:mm:ss}", 12.0f, bitmap.Width - 10, bitmap.Height - 10, 120, ImageFormat.Jpeg);
 
-                Application.Current.Dispatcher.Invoke(() =>
+                Application.Current?.Dispatcher.Invoke(() =>
                 {
-                    Img = ImageHelper.ConvertByteArrayToBitmapImage(data);
-                    //Img = ImageHelper.BitmapToBitmapImage(new Bitmap(t_img));
+                    //Img = ImageHelper.ConvertByteArrayToBitmapImage(data);
+                    Img = ImageHelper.BitmapToBitmapImage(new Bitmap(t_img));
                 });
 
             }
             catch (Exception ex)
             {
-
+                Debug.Fail(ex.ToString());
             }
-
-
-            //MemoryStream stream = new MemoryStream(data.ToArray());
-            //System.Drawing.Image image = System.Drawing.Image.FromStream(stream);
-            //image.Save("a3.jpeg", ImageFormat.Jpeg);
         }
 
 
@@ -86,10 +84,15 @@ namespace Raspberry.Client.ViewModels
         {
             Button btn = para as Button;
             if (!btn.IsFocused)
-                btn.Focus();
+            {
+                //btn.Focus();
+                Keyboard.Focus(btn);
+            }
 
-            Debug.WriteLine($"{nameof(PressKey)}:{btn.Content}");
-            socketClient.Send($"{btn.Content}");
+
+            Key key = ButtonKeyBoard.GetKey(btn);
+            Debug.WriteLine($"{nameof(PressKey)}:{key}");
+            socketClient.Send($"{key}");
         }
 
 
@@ -97,9 +100,11 @@ namespace Raspberry.Client.ViewModels
         {
             if (sender is Button btn)
             {
-                if ((Key)btn.Content == e.Key)
+                Key key = ButtonKeyBoard.GetKey(btn);
+                if (key == e.Key)
                 {
-                    Debug.WriteLine($"{nameof(Btn_KeyUp)}:{e.Key}");
+                    (Application.Current.MainWindow as MainWindow).imgHost.Focus();
+                    Debug.WriteLine($"{nameof(Btn_KeyUp)}:{key}");
                     socketClient.Send($"P");
                 }
             }

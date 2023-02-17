@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -23,21 +20,20 @@ namespace Raspberry.Client.Services
 
         public void Connect(string serverIp, int serverPort)
         {
-            Image image = Image.FromFile("a1.jpeg");
-            using (MemoryStream ms = new MemoryStream())
+            try
             {
-                image.Save(ms, ImageFormat.Jpeg);
-                byte[] arr = new byte[ms.Length];
-                ms.Position = 0;
-                ms.Read(arr, 0, (int)ms.Length);
-
-                Image image2 = Image.FromStream(ms);
-                image2.Save("a2.jpeg", ImageFormat.Jpeg);
+                client.Connect(serverIp, serverPort);
+            }
+            catch (SocketException ex)
+            {
+                Debug.Fail(ex.Message);
             }
 
+            if (!client.Connected)
+                return;
 
-            client.Connect(serverIp, serverPort);
-            netStream = new NetworkStream(client);
+            netStream = new NetworkStream(client, ownsSocket: true);
+            netStream.ReadTimeout = 5000;
 
             Task.Factory.StartNew(() =>
                 Receiver(),
@@ -58,50 +54,32 @@ namespace Raspberry.Client.Services
         private async void Receiver()
         {
             const int ReadBufferSize = 1024 * 1024;
+            byte[] readBuffer = new byte[ReadBufferSize];
 
             try
             {
-                netStream.ReadTimeout = 5000;
-                byte[] readBuffer = new byte[ReadBufferSize];
-                while (true)
+                while (netStream.CanRead)
                 {
-                    if (netStream.CanRead)
+                    var data = new List<byte>();
+                    int bytesRead = 0;
+                    while (netStream.DataAvailable)
                     {
-
-                        //byte[] data = new byte[ReadBufferSize];
-
-                        //int bytesRead = 0; int chunkSize = 0;
-
-                        //while (netStream.DataAvailable)
-                        //{
-                        //    bytesRead += chunkSize =
-                        //        await netStream.ReadAsync(data, bytesRead, data.Length - bytesRead);
-                        //}
-
-                        //Debug.WriteLine($"Read: {bytesRead}");
-                        //data = data.Take(bytesRead).ToArray();
-                        //if (data.Length > 0)
-                        //    Received?.Invoke(this, data);
-
-                        List<byte> data = new List<byte>();
-                        int bytesRead = 0; int chunkSize = 0;
-
-                        while (netStream.DataAvailable)
-                        {
-                            Array.Clear(readBuffer, 0, ReadBufferSize);
-                            bytesRead = await netStream.ReadAsync(readBuffer, 0, ReadBufferSize);
-                            data.AddRange(readBuffer.Take(bytesRead));
-                            Debug.WriteLine($"Read: {bytesRead}");
-                        }
-                        if (data.Any())
-                            Received?.Invoke(this, data.ToArray());
+                        bytesRead = await netStream.ReadAsync(readBuffer, 0, readBuffer.Length);
+                        data.AddRange(readBuffer.Take(bytesRead));
+                        Debug.WriteLine($"Read: {bytesRead}");
                     }
-                    await Task.Delay(0).ConfigureAwait(true);
+
+                    if (bytesRead > 0)
+                        Received?.Invoke(this, data.ToArray());
                 }
             }
             catch (OperationCanceledException ex)
             {
                 Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Array.Clear(readBuffer, 0, ReadBufferSize);
             }
         }
     }

@@ -23,14 +23,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="L298N\MotorWheel.py" />
+    <Compile Include="CSI\Camera.py" />
     <Compile Include="Program.py" />
     <Compile Include="SG90\CameraTerrace.py" />
     <Compile Include="TCP\client1.py" />
     <Compile Include="TCP\server1.py" />
     <Compile Include="TCP\socketcom.py" />
+    <Compile Include="Utils\Event.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="L298N\" />
+    <Folder Include="CSI\" />
+    <Folder Include="Utils\" />
     <Folder Include="SG90\" />
     <Folder Include="TCP\" />
   </ItemGroup>

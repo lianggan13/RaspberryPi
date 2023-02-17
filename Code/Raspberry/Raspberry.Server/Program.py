@@ -3,6 +3,7 @@
 from TCP.socketcom import *
 from L298N.MotorWheel import *
 from SG90.CameraTerrace import *
+from CSI.Camera import *
 from threading import Thread
 import sys,time,_thread
 import datetime
@@ -19,6 +20,8 @@ api_btn_state = "/api/btn/state"
 server = TcpServer("192.168.0.9",32769)
 wheel = MotorWheel()
 terrace = CameraTerrace()
+camera =  Camera()
+
 
 def setup():
     GPIO.setmode(GPIO.BCM)
@@ -49,9 +52,15 @@ def handle_client_received(sender:TcpServer,host:str,msg:str):
 def handle_exception(sender:TcpServer,exp:str):
     print (exp)
 
-def TestCamera():
-  
 
+def handle_camera_capured(sender:Camera,data:bytes):
+    for h in list(server._clients.keys()):
+        # camera.capture(stream, format='jpeg')
+        server.send_data(h,data)
+        print('data len = %d' % len(data))
+    
+
+def TestCamera():
     with picamera.PiCamera() as camera:
         camera.vflip = True
         camera.hflip = True
@@ -95,7 +104,10 @@ async def main():
     server.disconnected_event += handle_client_disconnected
     server.received_event += handle_client_received
     server.exception_event += handle_exception
-    _thread.start_new_thread(TestCamera,())
+    #_thread.start_new_thread(TestCamera,())
+    _thread.start_new_thread(camera.start(),())
+    
+    camera.capured_event +=handle_camera_capured
     await server.start()
 
     
