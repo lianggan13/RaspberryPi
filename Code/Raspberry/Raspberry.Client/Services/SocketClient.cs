@@ -53,7 +53,7 @@ namespace Raspberry.Client.Services
 
         private async void Receiver()
         {
-            const int ReadBufferSize = 1024 * 1024;
+            const int ReadBufferSize = 1024 * 512;
             byte[] readBuffer = new byte[ReadBufferSize];
 
             try
@@ -62,15 +62,45 @@ namespace Raspberry.Client.Services
                 {
                     var data = new List<byte>();
                     int bytesRead = 0;
-                    while (netStream.DataAvailable)
+                    //while (netStream.DataAvailable)
+                    while (true)
                     {
                         bytesRead = await netStream.ReadAsync(readBuffer, 0, readBuffer.Length);
-                        data.AddRange(readBuffer.Take(bytesRead));
                         Debug.WriteLine($"Read: {bytesRead}");
-                    }
 
-                    if (bytesRead > 0)
-                        Received?.Invoke(this, data.ToArray());
+                        var head = readBuffer.AsSpan(0, 4).ToArray();
+                        if (BitConverter.IsLittleEndian)
+                            Array.Reverse(head);
+
+                        int len = BitConverter.ToInt32(head, 0);
+                        data.AddRange(readBuffer.Skip(4).Take(bytesRead - 4));
+
+                        int l = len;
+                        while ((bytesRead = await netStream.ReadAsync(readBuffer, 0, readBuffer.Length)) > 0)
+                        {
+                            l -= bytesRead;
+                            if (l == 0)
+                            {
+                                data.AddRange(readBuffer.Take(bytesRead));
+                                break;
+                            }
+                            else if (l < 0)
+                            {
+                                data.AddRange(readBuffer.Take(len - data.Count()));
+                                break;
+                            }
+                            else
+                            {
+                                data.AddRange(readBuffer.Take(bytesRead));
+                            }
+                        }
+
+                        if (data.Count > 0)
+                        {
+                            //Debug.WriteLine(Encoding.UTF8.GetString(data.ToArray()));
+                            Received?.Invoke(this, data.ToArray());
+                        }
+                    }
                 }
             }
             catch (OperationCanceledException ex)
