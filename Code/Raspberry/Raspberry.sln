@@ -9,12 +9,6 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Raspberry.Server", "Raspber
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Raspberry.App", "Raspberry.App\Raspberry.App.csproj", "{0467F1A7-BF11-47C2-BF44-ED75DF424612}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{969FA1F6-A5F1-427B-BD30-826DEADD7125}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailAuth", "Samples\EmailAuth\EmailAuth.csproj", "{CAD98756-FC3B-4A32-B6B1-4C69232D56DE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp", "Samples\WeatherApp\WeatherApp.csproj", "{2E710833-6217-47D2-B8F8-889296D32C04}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,25 +27,9 @@ Global
 		{0467F1A7-BF11-47C2-BF44-ED75DF424612}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0467F1A7-BF11-47C2-BF44-ED75DF424612}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0467F1A7-BF11-47C2-BF44-ED75DF424612}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{CAD98756-FC3B-4A32-B6B1-4C69232D56DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CAD98756-FC3B-4A32-B6B1-4C69232D56DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CAD98756-FC3B-4A32-B6B1-4C69232D56DE}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{CAD98756-FC3B-4A32-B6B1-4C69232D56DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CAD98756-FC3B-4A32-B6B1-4C69232D56DE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CAD98756-FC3B-4A32-B6B1-4C69232D56DE}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{2E710833-6217-47D2-B8F8-889296D32C04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E710833-6217-47D2-B8F8-889296D32C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E710833-6217-47D2-B8F8-889296D32C04}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{2E710833-6217-47D2-B8F8-889296D32C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E710833-6217-47D2-B8F8-889296D32C04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E710833-6217-47D2-B8F8-889296D32C04}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{CAD98756-FC3B-4A32-B6B1-4C69232D56DE} = {969FA1F6-A5F1-427B-BD30-826DEADD7125}
-		{2E710833-6217-47D2-B8F8-889296D32C04} = {969FA1F6-A5F1-427B-BD30-826DEADD7125}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {80871773-0079-43A4-9A13-AE6DDE4A92DA}

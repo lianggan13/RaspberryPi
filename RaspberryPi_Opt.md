@@ -7,28 +7,6 @@ Keys: rpi-imager
 ```
 https://www.raspberrypi.com/software/
 ```
-
-### Image
-
-Keys: sourelist --> aliyun
-
-```
-编辑 /etc/apt/sources.list 文件，这里推荐就用系统自带的 nano 命令编辑，命令如下：
-sudo nano /etc/apt/sources.list
-
-进入编辑界面，删除原有的内容，粘贴如下内容：
-deb http://mirrors.aliyun.com/raspbian/raspbian/ bullseye  main non-free contrib rpi
-deb-src http://mirrors.aliyun.com/raspbian/raspbian/ bullseye main non-free contrib rpi
-
-更新软件索引清单
-sudo apt-get update
-
-比较索引清单更新依赖关系
-sudo apt-get upgrade -y
-```
-
-
-
 ### Vim
 
 Keys: install & configure vim
@@ -47,7 +25,26 @@ syntax on  #语法高亮
 set tabstop=4  #tab退四格
 ```
 
-### 
+### Image
+
+Keys: sourelist --> aliyun
+
+```
+编辑 /etc/apt/sources.list 文件，这里推荐就用系统自带的 nano 命令编辑，命令如下：
+sudo vi /etc/apt/sources.list
+
+进入编辑界面，删除原有的内容，粘贴如下内容：
+deb http://mirrors.aliyun.com/raspbian/raspbian/ bullseye  main non-free contrib rpi
+deb-src http://mirrors.aliyun.com/raspbian/raspbian/ bullseye main non-free contrib rpi
+
+更新软件索引清单
+sudo apt-get update
+
+比较索引清单更新依赖关系
+sudo apt-get upgrade -y
+```
+
+
 
 ### Static IP
 
@@ -57,9 +54,10 @@ Keys: dhcpcd.conf (方式1)
 sudo vi /etc/dhcpcd.conf
 
 interface eth0
-inform 192.168.13.13
-static routers=192.168.1.1
-static domain_name_servers=114.114.114.114
+static ip_address=192.168.0.9
+static routers=192.168.0.1
+static domain_name_servers=8.8.8.8
+static domain_search=
 noipv6
 
 interface wlan0
@@ -88,6 +86,115 @@ Keys: 网络配置文件
 	sudo vi /etc/network/interfaces
 	sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
 	sudo vi /etc/dhcpcd.conf
+
+
+
+### AP(Access Point)
+
+Ref link: https://raspberrypi-guide.github.io/networking/create-wireless-access-point
+
+```
+1.Getting started
+sudo apt install dnsmasq hostapd
+sudo systemctl stop dnsmasq
+sudo systemctl stop hostapd
+
+2.Configure a static IP
+sudo nano /etc/dhcpcd.conf
+    interface wlan0
+        static ip_address=192.168.4.1/24
+        nohook wpa_supplicant
+sudo service dhcpcd restart
+
+3.Configure the DHCP server
+sudo mv /etc/dnsmasq.conf /etc/dnsmasq.conf.orig
+sudo nano /etc/dnsmasq.conf
+    interface=wlan0
+    dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
+sudo systemctl start dnsmasq   
+
+5.Configure the access point host software
+sudo vi /etc/hostapd/hostapd.conf
+    interface=wlan0
+    driver=nl80211
+    ssid=raspberry
+    hw_mode=g
+    channel=6
+    ieee80211n=1
+    wmm_enabled=1
+    ht_capab=[HT40][SHORT-GI-20][DSSS_CCK-40]
+    macaddr_acl=0
+    auth_algs=1
+    ignore_broadcast_ssid=0
+    wpa=2
+    wpa_key_mgmt=WPA-PSK
+    wpa_passphrase=raspberry
+    rsn_pairwise=CCMP
+
+sudo vi /etc/default/hostapd
+	DAEMON_CONF="/etc/hostapd/hostapd.conf"
+
+6.Start up the wireless access point
+sudo systemctl unmask hostapd
+sudo systemctl enable hostapd
+sudo systemctl start hostapd
+
+7.Enable routing and IP masquerading
+sudo vi /etc/sysctl.conf
+	net.ipv4.ip_forward=1
+sudo iptables -t nat -A  POSTROUTING -o eth0 -j MASQUERADE
+sudo apt-get install netfilter-persistent
+sudo netfilter-persistent save
+
+8.Stop the access point
+sudo systemctl stop hostapd
+sudo vi /etc/dhcpcd.conf
+    #interface wlan0
+    #    static ip_address=192.168.4.1/24
+    #    nohook wpa_supplicant
+sudo reboot
+
+```
+
+### Samba
+
+```
+sudo apt-get install samba samba-common-bin
+
+sudo vi /etc/samba/smb.conf
+    #======================= Share Definitions =======================
+
+    [homes]
+       comment = /home/pi
+       browseable = yes
+
+    # By default, the home directories are exported read-only. Change the
+    # next parameter to 'no' if you want to be able to write to them.
+       read only = no
+
+    # File creation mask is set to 0700 for security reasons. If you want to
+    # create files with group=rw permissions, set next parameter to 0775.
+       create mask = 0777
+
+    # Directory creation mask is set to 0700 for security reasons. If you want to
+    # create dirs. with group=rw permissions, set next parameter to 0775.
+       directory mask = 0777
+
+sudo /etc/init.d/smbd restart
+sudo /etc/init.d/samba-ad-dc restart
+
+sudo smbpasswd -a pi
+
+win10
+控制面板 >> 程序
+	启动或关闭Windows功能
+			>> SMB1.0/CIFS文件共享支持和SMB直通
+	
+Win+R >> regedit
+	\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
+		>> AllowInsecureGuestAuth = 1
+
+```
 
 ### Route
 
@@ -128,9 +235,9 @@ framebuffer_height=1080
 hdmi_force_hotplug=1
 ```
 
-### Rmote 
+### VsCode Rmote 
 
-Keys: SSH、Python
+Keys: VsCode、SSH、Python
 
 ```
 1.Visual Stuido Code & FinalShell
@@ -345,46 +452,6 @@ sudo raspi-gpio get
 
 
 
-### Samba
-
-```
-sudo apt-get install samba samba-common-bin
-
-sudo vi /etc/samba/smb.conf
-    #======================= Share Definitions =======================
-
-    [homes]
-       comment = /home/pi
-       browseable = yes
-
-    # By default, the home directories are exported read-only. Change the
-    # next parameter to 'no' if you want to be able to write to them.
-       read only = no
-
-    # File creation mask is set to 0700 for security reasons. If you want to
-    # create files with group=rw permissions, set next parameter to 0775.
-       create mask = 0777
-
-    # Directory creation mask is set to 0700 for security reasons. If you want to
-    # create dirs. with group=rw permissions, set next parameter to 0775.
-       directory mask = 0777
-
-sudo /etc/init.d/smbd restart
-sudo /etc/init.d/samba-ad-dc restart
-
-sudo smbpasswd -a pi
-
-win10
-控制面板 >> 程序
-	启动或关闭Windows功能
-			>> SMB1.0/CIFS文件共享支持和SMB直通
-	
-Win+R >> regedit
-	\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters
-		>>
-			AllowInsecureGuestAuth = 1
-
-```
 
 ### Install
 

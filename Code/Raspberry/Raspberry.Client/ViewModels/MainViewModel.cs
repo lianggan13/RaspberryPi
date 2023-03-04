@@ -47,8 +47,8 @@ namespace Raspberry.Client.ViewModels
                 try
                 {
                     socketClient = new SocketClient();
-                    socketClient.Connect("192.168.137.218", 32769);
-                    //socketClient.Connect("192.168.", 32769);
+                    socketClient.Connect("192.168.4.1", 32769);
+                    ////socketClient.Connect("192.168.", 32769);
                     socketClient.Received += SocketClient_Received;
                 }
                 catch (System.Exception ex)
