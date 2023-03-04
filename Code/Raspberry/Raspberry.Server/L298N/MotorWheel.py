@@ -55,7 +55,7 @@ class MotorWheel:
 		GPIO.output(INT3,GPIO.LOW)
 		GPIO.output(INT4,GPIO.LOW)
 
-	def SendCommand(self,cmd:str):
+	def SendCmd(self,cmd:str):
 		try:
 			if(cmd.upper() == 'W'):
 				self.Forward()
@@ -75,6 +75,6 @@ if __name__ == "__main__":
 		wheel = MotorWheel()
 		while True:
 			data = input(">>")# raw_input(">>")
-			wheel.SendCommand(data)
+			wheel.SendCmd(data)
 	except KeyboardInterrupt: 
 		GPIO.cleanup()
