@@ -6,8 +6,6 @@ using Raspberry.Client.Utils;
 using Raspberry.Client.Views;
 using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,7 +47,8 @@ namespace Raspberry.Client.ViewModels
                 try
                 {
                     socketClient = new SocketClient();
-                    socketClient.Connect("192.168.0.9", 32769);
+                    socketClient.Connect("192.168.137.218", 32769);
+                    //socketClient.Connect("192.168.", 32769);
                     socketClient.Received += SocketClient_Received;
                 }
                 catch (System.Exception ex)
@@ -63,19 +62,19 @@ namespace Raspberry.Client.ViewModels
         {
             try
             {
-                Bitmap bitmap = ImageHelper.Buffer2Bitmap(data);
-                System.Drawing.Image t_img = ImageHelper.AddTextToImg(bitmap, $"{DateTime.Now:HH:mm:ss}", 12.0f, bitmap.Width - 10, bitmap.Height - 10, 120, ImageFormat.Jpeg);
+                //System.Drawing.Bitmap bitmap = ImageHelper.Buffer2Bitmap(data);
+                //System.Drawing.Image t_img = ImageHelper.AddTextToImg(bitmap, $"{DateTime.Now:HH:mm:ss}", 12.0f, bitmap.Width - 10, bitmap.Height - 10, 120, System.Drawing.Imaging.ImageFormat.Jpeg);
 
                 Application.Current?.Dispatcher.Invoke(() =>
                 {
-                    //Img = ImageHelper.ConvertByteArrayToBitmapImage(data);
-                    Img = ImageHelper.BitmapToBitmapImage(new Bitmap(t_img));
+                    Img = ImageHelper.ConvertByteArrayToBitmapImage(data);
+                    //Img = ImageHelper.BitmapToBitmapImage(new System.Drawing.Bitmap(t_img));
                 });
 
             }
             catch (Exception ex)
             {
-                Debug.Fail(ex.ToString());
+                //Debug.Fail(ex.ToString());
             }
         }
 
